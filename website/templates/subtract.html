@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<h1>Soustractions de 0 à 10 :</h1>
+	<br/>
+	<center>		
+	{% if my_answer %}
+		<div class="alert alert-{{ color }} alert-dismissible fade show" role="alert">
+		<h1> {{ my_answer }} </h1> 
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>	
+	{% endif %}
+		<br/>
+		
+		<h1 class="display-1"><strong>{{ num_1 }} - {{ num_2 }} =</strong></h1>
+		
+
+	</center>
+
+	<br/><br/>
+	<form method="POST" action="{% url 'subtract' %}">
+		{% csrf_token %}
+	  <div class="mb-3">	    
+	    <input type="text" class="form-control" placeholder="Ta réponse" name="answer">
+	    <input type="hidden" name="old_num_1" value="{{ num_1 }}">
+	    <input type="hidden" name="old_num_2" value="{{ num_2 }}">
+	  </div>
+	  <br/>	  
+	  <button type="submit" class="btn btn-secondary">Vérification</button>
+	</form>
+
+{% endblock %}
